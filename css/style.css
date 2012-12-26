@@ -1,0 +1,31 @@
+/**
+ * Created with IntelliJ IDEA.
+ * User: rnugraha
+ * Date: 12/26/12
+ * Time: 4:17 AM
+ * To change this template use File | Settings | File Templates.
+ */
+body {
+	margin:50px 0px; padding:0px;
+	text-align:center;
+	font-family: Lucida Grande,Lucida Sans,Arial,sans-serif;
+	background-color: #f8f8ff;
+	font-size: .8em;
+}
+h2{
+	color: #999;
+}
+.intro{
+	margin: 20px 20px 50px 20px;
+}
+.startPanel{
+	width:350px;
+	margin:0px auto;
+	text-align:left;
+	padding:15px;
+	border:1px solid #ccc;
+	background-color:#eee;
+	text-align:center;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+}
