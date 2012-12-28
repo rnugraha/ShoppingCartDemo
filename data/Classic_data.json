@@ -1,0 +1,23 @@
+[
+	{
+		"product_id": 1,
+		"category": "CLASSIC",
+		"artist": "Bach",
+		"album": "Bach Album",
+		"price": 15.00
+	},
+	{
+		"product_id": 2,
+		"category": "CLASSIC",
+		"artist": "Bethooven",
+		"album": "Bethooven Album",
+		"price": 13.00
+	},
+	{
+		"product_id": 3,
+		"category": "CLASSIC",
+		"artist": "Mozart",
+		"album": "Mozart Album",
+		"price": 14.20
+	}
+]

@@ -1,0 +1,16 @@
+[
+	{
+		"product_id": 1,
+		"category": "POP",
+		"artist": "Rihana",
+		"album": "Rihana",
+		"price": 15.00
+	},
+	{
+		"product_id": 2,
+		"category": "POP",
+		"artist": "Chris Brown",
+		"album": "F.A.M.E",
+		"price": 13.00
+	}
+]

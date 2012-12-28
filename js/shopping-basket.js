@@ -8,34 +8,57 @@
 
 $(document).ready(function() {
 
-	$( "#selectable" ).selectable();
+	/* GUI initialization
+	 ----------------------------------*/
+
+	$( "#selectable" ).selectable({
+		selected: function (event, ui) {
+			$("#productList").empty();
+
+			var items = new ItemCollection;
+			// get JSON data based on selected category
+			items.url =  "data/" + $(".ui-selected").attr('label') + "_data.json";
+			items.fetch({async: false}); // fecthing synchronously
+
+			// render products based on selected category
+			var itemViews = new ItemView({model: items});
+			itemViews.render();
+
+		}
+	});
 
 	$( ".button" ).button();
 
-	$( ".draggable" ).draggable({revert:true});
 
 	$( ".basketPanel" ).droppable({
-		drop: function( event, ui ) {
+		over: function( event, ui ) {
 			$( this )
 				.addClass( "ui-state-highlight" )
-				.find( ".basketPanel" );
+		},
+		drop: function( event, ui ) {
+			$( this )
+				.removeClass( "ui-state-highlight" );
 		}
+
 	});
 
-	var Product = Backbone.Model.extend({
+
+	/* Product Category
+	 ----------------------------------*/
+	var Category = Backbone.Model.extend({
 	});
 
-	var ProductCollection = Backbone.Collection.extend({
-		model: Product,
-		comparator: function (product)
+	var CategoryCollection = Backbone.Collection.extend({
+		model: Category,
+		comparator: function (category)
 		{
-			return product.get("position");
+			return category.get("category_id");
 		}
 	});
 
-	var ProductView = Backbone.View.extend({
-		el: $("#selectable"),
-		template: $('#item-tmpl').template(),
+	var CategoryView = Backbone.View.extend({
+		el: $('#selectable'),
+		template: $('#prod-cat-tmpl').template(),
 		render: function(){
 			$.tmpl(this.template, this.model.toArray()).appendTo(this.el);
 			return this;
@@ -43,6 +66,57 @@ $(document).ready(function() {
 
 	});
 
+	/* Product Item
+	 ----------------------------------*/
+	var Item = Backbone.Model.extend({
+	});
+
+	var ItemCollection = Backbone.Collection.extend({
+		model: Item,
+
+		parse: function(response) {
+			return response;
+		},
+
+		comparator: function (product)
+		{
+			return product.get("category_id");
+		}
+	});
+
+	var ItemView = Backbone.View.extend({
+		el: $('#productList'),
+		template: $('#prod-item-tmpl').template(),
+		render: function() {
+
+			$.tmpl(this.template, this.model.toArray()).appendTo(this.el);
+
+			$( ".draggable" ).draggable({
+				helper: 'clone',
+				opacity: 0.65
+			});
+
+			return this;
+		}
+	});
+
+	/* Order
+	 ----------------------------------*/
+	var Order = Backbone.Model.extend({
+		defaults: {
+			total: 0,
+			orderedItems: null
+		}
+	});
+
+	var OrderedProduct = Backbone.Collection.extend({
+		model: Item
+	});
+
+
+
+	/* Router
+		 ----------------------------------*/
 	var NavigationRouter = Backbone.Router.extend({
 		_data: null,
 		_items: null,
@@ -59,8 +133,8 @@ $(document).ready(function() {
 				success: function (data)
 				{
 					_this._data = data;
-					_this._items = new ProductCollection(data);
-					_this._view = new ProductView({ model: _this._items });
+					_this._items = new CategoryCollection(data);
+					_this._view = new CategoryView({ model: _this._items });
 					_this._view.render();
 					Backbone.history.loadUrl();
 				}
@@ -72,5 +146,6 @@ $(document).ready(function() {
 	});
 
 	var navigationRouter = new NavigationRouter;
+
 	Backbone.history.start();
 });
