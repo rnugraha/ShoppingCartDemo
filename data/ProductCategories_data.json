@@ -1,0 +1,30 @@
+[
+	{
+		"position": 1,
+		"title": "Classic"
+	},
+	{
+		"position": 2,
+		"title": "Pop"
+	},
+	{
+		"position": 3,
+		"title": "Hip-hop"
+	},
+	{
+		"position": 4,
+		"title": "R&B"
+	},
+	{
+		"position": 5,
+		"title": "Dance"
+	},
+	{
+		"position": 6,
+		"title": "Jazz"
+	},
+	{
+		"position": 7,
+		"title": "Reggae"
+	}
+]
