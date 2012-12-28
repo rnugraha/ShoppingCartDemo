@@ -5,6 +5,9 @@
  * Time: 4:17 AM
  * To change this template use File | Settings | File Templates.
  */
+
+/* Layout
+----------------------------------*/
 body {
 	margin:50px 0px; padding:0px;
 	text-align:center;
@@ -18,14 +21,54 @@ h2{
 .intro{
 	margin: 20px 20px 50px 20px;
 }
-.startPanel{
-	width:350px;
+.panel{
+	width:600px;
 	margin:0px auto;
 	text-align:left;
 	padding:15px;
 	border:1px solid #ccc;
 	background-color:#eee;
 	text-align:center;
+
+}
+.footer{
+	padding: 10px;
+	font-size: .7em;
+	color: #ccc;
+}
+#productCategories {
+	float:left;
+	width:150px;
+}
+#productList{
+	float:left;
+}
+#productDesc{
+	clear: both;
+}
+/* Elements
+----------------------------------*/
+#selectable .ui-selecting { background: #d7ebf9; }
+#selectable .ui-selected { background: #3baae3; color: white; }
+#selectable { list-style-type: none; margin: 0; padding: 0; width: 100%; }
+#selectable li { margin: 3px; padding: 0.4em; font-size: 1.2em; height: 18px; }
+.explanationTxt {
+	font-size: 1.4em;
+	color: #ccc;
+}
+.explanationTxtFrame {
+	padding: 10px;
+	border: 2px dashed #ccc;
 	-moz-border-radius: 10px;
 	border-radius: 10px;
 }
+.draggable { width: 100px; height: 100px; padding: 0.4em; float: left; margin: 3px; }
+#basketPanel { width: 150px; height: 150px; padding: 0.5em; float: left; margin: 10px;}
+
+#orderedProducts, #totalPrice {list-style-type: none;}
+#orderedProducts li, #totalPrice li {margin-left:-40px; text-align: left; border-bottom: #ccc 1px dotted; }
+#orderedProducts .orderedProdTxt {}
+#orderedProducts .orderedProdPrice, #totalPrice .orderedProdPrice {float: right;}
+
+
+
