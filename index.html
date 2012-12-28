@@ -15,10 +15,20 @@
 
 	<script src="js/shopping-basket.js" type="text/javascript"></script>
 
-	<script type="text/template" id="item-tmpl">
-			{{if attributes.title != ""}}
-				<li class="ui-widget-content" id="item${attributes.position}">${ attributes.title }</li>
+	<!--Product Category template-->
+	<script type="text/template" id="prod-cat-tmpl">
+			{{if attributes.category_id != ""}}
+				<li class="ui-widget-content" id="cat_${attributes.category_id}" label="${attributes.value}">${ attributes.title }</li>
 			{{/if}}
+	</script>
+
+	<!--Product Item template-->
+	<script type="text/template" id="prod-item-tmpl">
+		{{if attributes.product_id != ""}}
+		<div id="item${attributes.product_id}" class="ui-widget-content draggable">
+			<p><b>${attributes.album}</b> <br/><br/> ${attributes.artist} <br/>  &euro; ${attributes.price}</p>
+		</div>
+		{{/if}}
 	</script>
 
 </head>
@@ -28,30 +38,21 @@
 	<div id="productCategories">
 		<ol id="selectable"/>
 	</div>
-	<div id="productList">
-		<!--&lt;!&ndash;product 1 &ndash;&gt;-->
-		<!--<div id="product1" class="ui-widget-content draggable">-->
-			<!--<p>Drag me to my target</p>-->
-		<!--</div>-->
-		<!--&lt;!&ndash;product 1 &ndash;&gt;-->
-		<!--<div id="product2" class="ui-widget-content draggable">-->
-			<!--<p>Drag me to my target</p>-->
-		<!--</div>-->
-		<!--&lt;!&ndash;product 1 &ndash;&gt;-->
-		<!--<div id="product3" class="ui-widget-content draggable">-->
-			<!--<p>Drag me to my target</p>-->
-		<!--</div>-->
-
-	</div>
+	<div id="productList"></div>
 	<div id="productDesc"></div>
 </div>
 <div class="panel basketPanel">
+	<div class="explanationTxtFrame">
+		<span class="explanationTxt">Drag and drop your product here.</span>
+	</div>
+	<!--  TODO
 	<ul id="orderedProducts">
 		<li><label class="orderedProdTxt">Product 1</label><label class="orderedProdPrice">$13</label></li>
 	</ul>
 	<ul id="totalPrice">
-		<li><label class="orderedProdTxt">TOTAL PRICE</label><label class="orderedProdPrice">$500</label></li>
+		<li><label id="totalPriceAmount">$500</label></li>
 	</ul>
+	-->
 </div>
 <div class="panel actionPanel">
 	<button class="button">Reset Basket</button>

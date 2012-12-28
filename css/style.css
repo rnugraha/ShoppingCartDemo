@@ -1,9 +1,7 @@
 /**
- * Created with IntelliJ IDEA.
  * User: rnugraha
  * Date: 12/26/12
  * Time: 4:17 AM
- * To change this template use File | Settings | File Templates.
  */
 
 /* Layout
@@ -15,12 +13,8 @@ body {
 	background-color: #f8f8ff;
 	font-size: .8em;
 }
-h2{
-	color: #999;
-}
-.intro{
-	margin: 20px 20px 50px 20px;
-}
+h2{color: #999;}
+
 .panel{
 	width:600px;
 	margin:0px auto;
@@ -31,21 +25,17 @@ h2{
 	text-align:center;
 
 }
+
 .footer{
 	padding: 10px;
 	font-size: .7em;
 	color: #ccc;
 }
-#productCategories {
-	float:left;
-	width:150px;
-}
-#productList{
-	float:left;
-}
-#productDesc{
-	clear: both;
-}
+
+#productCategories {float:left;width:150px;}
+#productList{float:left;max-width: 400px; min-height: 100px;}
+#productDesc{clear: both;}
+
 /* Elements
 ----------------------------------*/
 #selectable .ui-selecting { background: #d7ebf9; }
@@ -62,13 +52,14 @@ h2{
 	-moz-border-radius: 10px;
 	border-radius: 10px;
 }
-.draggable { width: 100px; height: 100px; padding: 0.4em; float: left; margin: 3px; }
+.draggable { width: 100px; height: 100px; padding: 0.4em; float: left; margin: 3px;}
 #basketPanel { width: 150px; height: 150px; padding: 0.5em; float: left; margin: 10px;}
 
 #orderedProducts, #totalPrice {list-style-type: none;}
-#orderedProducts li, #totalPrice li {margin-left:-40px; text-align: left; border-bottom: #ccc 1px dotted; }
-#orderedProducts .orderedProdTxt {}
-#orderedProducts .orderedProdPrice, #totalPrice .orderedProdPrice {float: right;}
+#orderedProducts li {margin-left:-40px; text-align: left; border-bottom: #ccc 1px dotted; }
+#orderedProducts .orderedProdPrice {float: right;}
+#totalPriceAmount {font-size: 1.9em;}
+#totalPrice li {text-align: right; color: #2779aa}
 
 
 

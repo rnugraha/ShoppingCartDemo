@@ -1,30 +1,37 @@
 [
 	{
-		"position": 1,
+		"category_id": 1,
+		"value": "CLASSIC",
 		"title": "Classic"
 	},
 	{
-		"position": 2,
+		"category_id": 2,
+		"value": "POP",
 		"title": "Pop"
 	},
 	{
-		"position": 3,
+		"category_id": 3,
+		"value": "HIPHOP",
 		"title": "Hip-hop"
 	},
 	{
-		"position": 4,
+		"category_id": 4,
+		"value": "RNB",
 		"title": "R&B"
 	},
 	{
-		"position": 5,
+		"category_id": 5,
+		"value": "DANCE",
 		"title": "Dance"
 	},
 	{
-		"position": 6,
+		"category_id": 6,
+		"value": "JAZZ",
 		"title": "Jazz"
 	},
 	{
-		"position": 7,
+		"category_id": 7,
+		"value": "REGGAE",
 		"title": "Reggae"
 	}
 ]
