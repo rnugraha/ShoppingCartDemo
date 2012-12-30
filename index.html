@@ -25,26 +25,35 @@
 	<!--Product Item template-->
 	<script type="text/template" id="prod-item-tmpl">
 		{{if attributes.product_id != ""}}
-		<div id="item${attributes.product_id}" class="ui-widget-content draggable">
 			<p><b>${attributes.album}</b> <br/><br/> ${attributes.artist} <br/>  &euro; ${attributes.price}</p>
-		</div>
 		{{/if}}
 	</script>
 
+	<!--Order Item template-->
+	<script type="text/template" id="order-item-tmpl">
+		{{if attributes.product_id != ""}}
+			<li><label class="orderedProdTxt">Product 1</label><label class="orderedProdPrice">$13</label></li>
+		{{/if}}
+	</script>
+
+	<!--Order Item template-->
+	<script type="text/template" id="empty-order-tmpl">
+		<div class="explanationTxtFrame">
+			<span class="explanationTxt">Drag and drop your product here.</span>
+		</div>
+	</script>
 </head>
+
 <body>
 <h2>Shopping Cart Demo</h2>
 <div class="panel productPanel">
 	<div id="productCategories">
-		<ol id="selectable"/>
+		<ol id="categories"/>
 	</div>
 	<div id="productList"></div>
 	<div id="productDesc"></div>
 </div>
 <div class="panel basketPanel">
-	<div class="explanationTxtFrame">
-		<span class="explanationTxt">Drag and drop your product here.</span>
-	</div>
 	<!--  TODO
 	<ul id="orderedProducts">
 		<li><label class="orderedProdTxt">Product 1</label><label class="orderedProdPrice">$13</label></li>

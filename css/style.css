@@ -38,10 +38,10 @@ h2{color: #999;}
 
 /* Elements
 ----------------------------------*/
-#selectable .ui-selecting { background: #d7ebf9; }
-#selectable .ui-selected { background: #3baae3; color: white; }
-#selectable { list-style-type: none; margin: 0; padding: 0; width: 100%; }
-#selectable li { margin: 3px; padding: 0.4em; font-size: 1.2em; height: 18px; }
+#categories .ui-selecting { background: #d7ebf9; }
+#categories .ui-selected { background: #3baae3; color: white; }
+#categories { list-style-type: none; margin: 0; padding: 0; width: 100%; }
+#categories li { margin: 3px; padding: 0.4em; font-size: 1.2em; height: 18px; }
 .explanationTxt {
 	font-size: 1.4em;
 	color: #ccc;
