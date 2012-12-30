@@ -1,51 +1,19 @@
 /**
- * Created with IntelliJ IDEA.
  * User: rnugraha
  * Date: 12/27/12
  * Time: 3:30 PM
- * To change this template use File | Settings | File Templates.
  */
 
 $(document).ready(function() {
 
 	/* GUI initialization
 	 ----------------------------------*/
-
-	$( "#selectable" ).selectable({
-		selected: function (event, ui) {
-			$("#productList").empty();
-
-			var items = new ItemCollection;
-			// get JSON data based on selected category
-			items.url =  "data/" + $(".ui-selected").attr('label') + "_data.json";
-			items.fetch({async: false}); // fecthing synchronously
-
-			// render products based on selected category
-			var itemViews = new ItemView({model: items});
-			itemViews.render();
-
-		}
-	});
-
 	$( ".button" ).button();
-
-
-	$( ".basketPanel" ).droppable({
-		over: function( event, ui ) {
-			$( this )
-				.addClass( "ui-state-highlight" )
-		},
-		drop: function( event, ui ) {
-			$( this )
-				.removeClass( "ui-state-highlight" );
-		}
-
-	});
-
 
 	/* Product Category
 	 ----------------------------------*/
 	var Category = Backbone.Model.extend({
+
 	});
 
 	var CategoryCollection = Backbone.Collection.extend({
@@ -57,9 +25,27 @@ $(document).ready(function() {
 	});
 
 	var CategoryView = Backbone.View.extend({
-		el: $('#selectable'),
+		el: $('#categories'),
 		template: $('#prod-cat-tmpl').template(),
 		render: function(){
+
+			$( "#categories" ).selectable({
+				selected: function (event, ui) {
+					$("#productList").empty();
+
+					var items = new ItemCollection;
+
+					// get JSON data based on selected category
+					items.url =  "data/" + $(".ui-selected").attr('label') + "_data.json";
+					items.fetch({async: false}); // fetch synchronously
+
+					// render products based on selected category
+					var itemViewList = new ItemViewList({collection: items});
+					itemViewList.render();
+
+				}
+			});
+
 			$.tmpl(this.template, this.model.toArray()).appendTo(this.el);
 			return this;
 		}
@@ -84,18 +70,34 @@ $(document).ready(function() {
 		}
 	});
 
-	var ItemView = Backbone.View.extend({
+	var ItemViewList = Backbone.View.extend({
 		el: $('#productList'),
-		template: $('#prod-item-tmpl').template(),
+		initialize: function(){
+			_.bindAll(this, "renderItem");
+		},
+		renderItem: function(model){
+			var itemView = new ItemView({model: model});
+			itemView.render();
+			$(this.el).append(itemView.el);
+		},
 		render: function() {
+			this.collection.each(this.renderItem);
+		}
+	});
 
-			$.tmpl(this.template, this.model.toArray()).appendTo(this.el);
-
-			$( ".draggable" ).draggable({
+	var ItemView = Backbone.View.extend({
+		className: 'ui-widget-content draggable',
+		template: $('#prod-item-tmpl').template(),
+		initialize: function () {
+			$(this.el).draggable({
 				helper: 'clone',
 				opacity: 0.65
 			});
-
+			$(this.el).data("backbone-view", this);
+		},
+		render: function() {
+			var html = $.tmpl(this.template, this.model);
+			$(this.el).append(html);
 			return this;
 		}
 	});
@@ -104,23 +106,52 @@ $(document).ready(function() {
 	 ----------------------------------*/
 	var Order = Backbone.Model.extend({
 		defaults: {
-			total: 0,
-			orderedItems: null
+			totalPrice: 0,
+			orderedProducts: null
 		}
 	});
 
-	var OrderedProduct = Backbone.Collection.extend({
+	var OrderedProducts = Backbone.Collection.extend({
 		model: Item
 	});
 
+	var coll = new OrderedProducts;
 
+	var OrderedProductView = Backbone.View.extend({
+		el: $('#basketPanel'),
+		template: $('#order-item-tmpl').template(),
+		render: function() {
+			// render as jquery ui droppable
+			$( ".basketPanel" ).droppable({
+				tolerance: 'pointer',
+				create: function (event, ui) {
+					var emptyBasketTmpl = $('#empty-order-tmpl').template();
+					$.tmpl(emptyBasketTmpl).appendTo(this);
+				},
 
-	/* Router
-		 ----------------------------------*/
-	var NavigationRouter = Backbone.Router.extend({
-		_data: null,
-		_items: null,
-		_view: null,
+				over: function( event, ui ) {
+					$( this )
+						.addClass( "ui-state-highlight" )
+				},
+
+				drop: function( event, ui ) {
+					$( this ).removeClass( "ui-state-highlight" );
+					var model = $(ui.draggable).data("backbone-view").model;
+					coll.add(model);
+					console.log(coll.toJSON());
+				}
+			});
+		}
+	});
+
+	/* Application Router
+	----------------------------------*/
+	var AppRouter = Backbone.Router.extend({
+		_cat_data: null,
+		_cat_items: null,
+		_cat_view: null,
+
+		_basket_view: null,
 
 		initialize: function (options)
 		{
@@ -132,20 +163,23 @@ $(document).ready(function() {
 				async: false,
 				success: function (data)
 				{
-					_this._data = data;
-					_this._items = new CategoryCollection(data);
-					_this._view = new CategoryView({ model: _this._items });
-					_this._view.render();
+					_this._cat_data = data;
+					_this._cat_items = new CategoryCollection(data);
+					_this._cat_view = new CategoryView({ model: _this._cat_items });
+					_this._cat_view.render();
+
+					_this._basket_view = new OrderedProductView;
+					_this._basket_view.render();
+
 					Backbone.history.loadUrl();
 				}
-
 			});
 
 			return this;
 		}
 	});
 
-	var navigationRouter = new NavigationRouter;
+	var appRouter = new AppRouter;
 
 	Backbone.history.start();
 });
