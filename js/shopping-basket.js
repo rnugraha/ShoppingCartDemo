@@ -104,41 +104,66 @@ $(document).ready(function() {
 
 	/* Order
 	 ----------------------------------*/
-	var Order = Backbone.Model.extend({
-		defaults: {
-			totalPrice: 0,
-			orderedProducts: null
+
+	var TotalPrice = Backbone.Model.extend({
+
+	});
+
+	var TotalPriceView = Backbone.View.extend({
+		el: '#totalPrice',
+		template: $('#total-price-tmpl').template(),
+		render: function () {
+			$(this.el).empty();
+			$.tmpl(this.template, this.model).appendTo(this.el);
+			return this;
 		}
 	});
 
+
 	var OrderedProducts = Backbone.Collection.extend({
-		model: Item
+		model: Item,
+		totalPrice: function () {
+			return this.reduce(function(memo, value) { return memo + value.get("price") }, 0);
+		}
 	});
 
 	var coll = new OrderedProducts;
 
 	var OrderedProductView = Backbone.View.extend({
-		el: $('#basketPanel'),
+		el: "#orderedProducts",
 		template: $('#order-item-tmpl').template(),
+
 		render: function() {
+			var _view = this;
 			// render as jquery ui droppable
 			$( ".basketPanel" ).droppable({
 				tolerance: 'pointer',
-				create: function (event, ui) {
-					var emptyBasketTmpl = $('#empty-order-tmpl').template();
-					$.tmpl(emptyBasketTmpl).appendTo(this);
-				},
-
 				over: function( event, ui ) {
+					// turn to yellow when draggable hover it
 					$( this )
 						.addClass( "ui-state-highlight" )
 				},
-
 				drop: function( event, ui ) {
+					// remove hover color
 					$( this ).removeClass( "ui-state-highlight" );
+
+					//get associated item model and add it to collection
 					var model = $(ui.draggable).data("backbone-view").model;
 					coll.add(model);
 					console.log(coll.toJSON());
+
+					// empty basket
+					$('.explanationTxtFrame').remove();
+					$(_view.el).empty();
+
+					// refresh with the new array
+					$.tmpl(_view.template, coll.toArray()).appendTo(_view.el);
+
+					// total price
+					var total = new TotalPrice({total:coll.totalPrice()});
+					var totalView = new TotalPriceView({model:total});
+					totalView.render();
+
 				}
 			});
 		}
@@ -168,7 +193,7 @@ $(document).ready(function() {
 					_this._cat_view = new CategoryView({ model: _this._cat_items });
 					_this._cat_view.render();
 
-					_this._basket_view = new OrderedProductView;
+					_this._basket_view = new OrderedProductView();
 					_this._basket_view.render();
 
 					Backbone.history.loadUrl();
