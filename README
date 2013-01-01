@@ -3,7 +3,7 @@ Simple Shopping Cart Demo using :
 jQuery (jquery-1.6.2.min.js)
 - http://jquery.com/
 
-jquery.tmpl (jquery.tmpl.min.js)
+jquery.tmpl (jquery.tmpl.js)
 - http://github.com/jquery/jquery-tmpl
 
 jquery-ui (jquery-ui-1.9.2.js)
