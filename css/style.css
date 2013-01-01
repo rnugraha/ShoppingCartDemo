@@ -4,7 +4,7 @@
  * Time: 4:17 AM
  */
 
-/* Layout
+/* General
 ----------------------------------*/
 body {
 	margin:50px 0px; padding:0px;
@@ -12,11 +12,12 @@ body {
 	font-family: Lucida Grande,Lucida Sans,Arial,sans-serif;
 	background-color: #f8f8ff;
 	font-size: .8em;
+	color: #666;
 }
-h2{color: #999;}
-
+h2{color: #2779AA;font-size: 2em;}
+a{text-decoration: none}
 .panel{
-	width:600px;
+	width:623px;
 	margin:0px auto;
 	text-align:left;
 	padding:15px;
@@ -25,15 +26,16 @@ h2{color: #999;}
 	text-align:center;
 
 }
-
 .footer{
 	padding: 10px;
 	font-size: .7em;
 	color: #ccc;
 }
+.hidden {display: none;}
+.showed {display: block;}
 
 #productCategories {float:left;width:150px;}
-#productList{float:left;max-width: 400px; min-height: 100px;}
+#productList{float:left;max-width: 100%; min-height: 100px;}
 #productDesc{clear: both;}
 
 /* Elements
@@ -46,20 +48,25 @@ h2{color: #999;}
 	font-size: 1.4em;
 	color: #ccc;
 }
-.explanationTxtFrame {
+#explanationTxtFrame {
 	padding: 10px;
 	border: 2px dashed #ccc;
 	-moz-border-radius: 10px;
 	border-radius: 10px;
 }
 .draggable { width: 100px; height: 100px; padding: 0.4em; float: left; margin: 3px;}
-#basketPanel { width: 150px; height: 150px; padding: 0.5em; float: left; margin: 10px;}
+.basketHighlight {background: #fafad2}
+.removeItem{margin: 0px;font-size: .8em}
 
 #orderedProducts, #totalPrice {list-style-type: none;}
-#orderedProducts li {margin-left:-40px; text-align: left; border-bottom: #ccc 1px dotted; }
+#orderedProducts li {margin-left:-40px; text-align: left; border-bottom: #ccc 1px dotted; font-size: 1.2em;}
+#orderedProducts .orderedProdTxt {float: left; margin-top: 8px;}
+#orderedProducts .orderedProdTxt .albumTxt {font-weight: bold;}
 #orderedProducts .orderedProdPrice {float: right;}
+#orderedProducts .orderedProdPrice .priceTxt {vertical-align: middle; margin-right: 15px;}
+#orderedProducts p {margin: 3px;}
 #totalPriceAmount {font-size: 1.9em;}
-#totalPrice li {text-align: right; color: #2779aa}
+#totalPrice li {text-align: right; color: #2779aa; margin-right: 52px;}
 
 
 
