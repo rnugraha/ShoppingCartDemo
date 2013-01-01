@@ -3,21 +3,27 @@
 		"product_id": 1,
 		"category": "CLASSIC",
 		"artist": "Bach",
-		"album": "Bach Album",
+		"album": "Musical Offering",
 		"price": 15.00
 	},
 	{
 		"product_id": 2,
 		"category": "CLASSIC",
-		"artist": "Bethooven",
-		"album": "Bethooven Album",
+		"artist": "Beethoven",
+		"album": "4 Sonatas for Piano",
+		"price": 13.00
+	},	{
+		"product_id": 3,
+		"category": "CLASSIC",
+		"artist": "Wagner",
+		"album": "Tristan und Isolde Act II",
 		"price": 13.00
 	},
 	{
-		"product_id": 3,
+		"product_id": 4,
 		"category": "CLASSIC",
 		"artist": "Mozart",
-		"album": "Mozart Album",
+		"album": "Requiem",
 		"price": 14.20
 	}
 ]

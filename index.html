@@ -7,7 +7,7 @@
 	<link href="css/style.css" rel="stylesheet">
 
 	<script src="js/lib/jquery-1.6.2.min.js" type="text/javascript"></script>
-	<script src="js/lib/jquery.tmpl.min.js" type="text/javascript"></script>
+	<script src="js/lib/jquery.tmpl.js" type="text/javascript"></script>
 	<script src="js/lib/jquery-ui-1.9.2.custom.js" type="text/javascript"></script>
 
 	<script src="js/lib/underscore.js" type="text/javascript"></script>
@@ -18,54 +18,60 @@
 	<!--Product Category template-->
 	<script type="text/template" id="prod-cat-tmpl">
 			{{if attributes.category_id != ""}}
-				<li class="ui-widget-content" id="cat_${attributes.category_id}" label="${attributes.value}">${ attributes.title }</li>
+				<li class="ui-widget-content" id="cat_${attributes.category_id}" label="${attributes.value}">
+					${ attributes.title }
+				</li>
 			{{/if}}
 	</script>
 
 	<!--Product Item template-->
 	<script type="text/template" id="prod-item-tmpl">
 		{{if attributes.product_id != ""}}
-			<p><b>${attributes.album}</b> <br/><br/> ${attributes.artist} <br/>  &euro; ${attributes.price}</p>
+			<p><strong>${attributes.album}</strong> <br/><br/> ${attributes.artist} <br/>  &euro; ${attributes.price}</p>
 		{{/if}}
 	</script>
 
 	<!--Order Item template-->
 	<script type="text/template" id="order-item-tmpl">
 		{{if attributes.product_id != ""}}
-			<li><label class="orderedProdTxt">${attributes.album} &minus; ${attributes.artist}</label><label class="orderedProdPrice">&euro; ${attributes.price}</label></li>
+			<p class="orderedProdTxt"><label class="albumTxt">${attributes.album}</label> &minus; <label class="artistTxt">${attributes.artist}</label></p>
+			<p class="orderedProdPrice">
+				<label class="priceTxt">&euro; ${attributes.price}</label>
+				<button class="removeItem">remove</button>
+			</p>
+			<div style="clear: both;"></div>
 		{{/if}}
 	</script>
 
 	<!--Total Price template-->
 	<script type="text/template" id="total-price-tmpl">
-		{{if attributes.total != ""}}
-			<li><label id="totalPriceAmount">&euro; ${attributes.total}</label></li>
-		{{/if}}
+		<li><label id="totalPriceAmount">&euro; ${totalPrice}</label></li>
 	</script>
 </head>
 
 <body>
-<h2>Shopping Cart Demo</h2>
-<div class="panel productPanel">
-	<div id="productCategories">
-		<ol id="categories"/>
+	<h2>Shopping Cart Demo</h2>
+	<div class="panel productPanel">
+		<div id="productCategories">
+			<ol id="categories"/>
+		</div>
+		<div id="productList"></div>
+		<div id="productDesc"></div>
 	</div>
-	<div id="productList"></div>
-	<div id="productDesc"></div>
-</div>
-<div class="panel basketPanel">
-	<div class="explanationTxtFrame">
-		<span class="explanationTxt">Drag and drop your product here.</span>
+	<div class="panel basketPanel">
+		<!-- ************************************************ -->
+		<!-- description - displayed only when order is empty -->
+		<!-- ************************************************ -->
+		<div id='explanationTxtFrame' class="showed" >
+			<span class="explanationTxt">Drag and drop your product here.</span>
+		</div>
+		<!-- ************************************************ -->
+		<ul id="orderedProducts"></ul>
+		<ul id="totalPrice"></ul>
 	</div>
-	<ul id="orderedProducts"></ul>
-	<ul id="totalPrice"></ul>
-</div>
-<div class="panel actionPanel">
-	<button class="button">Reset Basket</button>
-	<button class="button">Submit</button>
-</div>
-<div class="footer">
-	Shopping Cart Demo - Riza Nugraha 2012
-</div>
+	<div id="buttonList" class="panel actionPanel"></div>
+	<div class="footer">
+		Shopping Cart Demo - 2012
+	</div>
 </body>
 </html>
